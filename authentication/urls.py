@@ -4,6 +4,6 @@ from authentication.views import MyLoginView
 
 
 urlpatterns = [
-    path('mylogin/', MyLoginView.as_view(), name='login'),
+    path('', MyLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     ]
