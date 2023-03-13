@@ -56,7 +56,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'dummy.urls'
-LOGIN_REDIRECT_URL = 'schema'
+LOGIN_REDIRECT_URL = 'schemas'
 LOGOUT_REDIRECT_URL = 'login'
 
 TEMPLATES = [
