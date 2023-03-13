@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+  <div class="tableWrap">
+    <div class="flexTableHead" style="justify-content: flex-start; gap: 40px">
+      <h2>{{schema.name}}</h2>
+      <div><a href="{% url 'schema_update' schema.id %}">Edit schema</a></div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Column name</th>
+        <th scope="col">Column type</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for column in schema.columns.all %}
+        <tr>
+          <th scope="row">{{ column.id }}</th>
+          <td>{{ column.name }}</td>
+          <td>{{ column.type }}</td>
+        </tr>
+      {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="tableWrap">
+    <div class="flexTableHead" >
+      <h2>Data sets</h2>
+      <div>
+        <form id="generate-data-form" method="post">
+           {% csrf_token %}
+          <label for="num-records">Rows: </label>
+          <input type="number" id="num-records" name="num-records" min="1" max="1000" required>
+          <button type="submit" id="generate-data-btn" class="btn btn-success">Generate Data</button>
+        </form>
+      </div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Created</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody id="tbody">
+      {% for dataset in schema.dataset.all %}
+        <tr>
+          <th scope="row">{{ dataset.id }}</th>
+          <td>{{ dataset.data }}</td>
+          <td data-status="{{ dataset.id }}">
+              <button type="" disabled class="buttonReady btn btn-success">Ready</button>
+          </td>
+          <td data-link="{{ dataset.id }}">{% if dataset.status %}<a href="{% url 'download_csv' dataset.id %}">Download</a>{% endif %}</td>
+        </tr>
+      {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+<script>
+$(document).ready(function(){
+  $('#generate-data-form').on('submit', function(event){
+    event.preventDefault();
+    $.ajax({
+        url: '{% url 'schema_detail' schema.id %}',
+        type: 'POST',
+        data: {
+            'num-records': $('#num-records').val(),
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        beforeSend: () => {
+        var newRow =$('<tr><th></th><td></td><td data-status="processing"><button type="button" class="btn buttonProcessing btn-secondary" disabled>Processing</button></td><td></td></tr>');
+         $('#tbody').append(newRow);
+        },
+        success: function(data) {
+          let dataSetData = JSON.parse(data['data_set'])[0]
+          let date = new Date(dataSetData['fields']['data']);
+          let formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          var newRow = `<tr>
+                            <th scope="row">${dataSetData['pk']}</th>
+                            <td>${formattedDate}</td>
+                            <td data-status="${dataSetData['pk']}"><button type="" disabled class="buttonReady btn btn-success">Ready</button></td>
+                            <td data-link="${dataSetData['pk']}"><a href="/schemas/download_csv/${dataSetData['pk']}">Download</a></td>
+                          </tr>`;
+          $('#tbody tr:last').replaceWith(newRow);
+
+              }
+          });
+      });
+      })
+  </script>
+{% endblock %}
+
+

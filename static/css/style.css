@@ -1,0 +1,178 @@
+body{
+    /*background: black;*/
+    margin: 0;
+    padding: 0;
+}
+.login{
+    position: relative;
+    height: 900px;
+    width: 1440px;
+    left: -720px;
+    top: -451px;
+    border-radius: 0px;
+
+    background: #FFFFFF;
+}
+.inner h2{
+
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 79px;
+    /* identical to box height, or 219% */
+    text-align:center;
+    margin:0 0 44px
+}
+.card {
+
+    margin: 180px auto 275px;
+    width: 650px;
+}
+.inner{
+    padding:42px 171px 131px
+
+
+}
+.login-username, .login-password {
+    padding:9px 11px 5px 9px;
+
+}
+.tableWrap{
+    width: 75%;
+    margin: 50px;
+}
+.tableWrap a{
+    padding: 0;
+}
+
+.flexTableHead{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+
+
+
+.column-name {
+    display: inline-block;
+    width: 150px;
+}
+
+.column-order {
+    display: inline-block;
+    width: 50px;
+}
+
+.hidden {
+    display: none;
+}
+
+.column {
+    padding: 20px;
+}
+
+.column-form {
+    display: flex;
+    align-items: flex-start;
+    width: 85%;
+    gap: 10px;
+}
+
+.column-form input, .column-form select {
+    width: 130px;
+    height: 33px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(227, 226, 226);
+    border-image: initial;
+    border-radius: 3px;
+    color: black !important;
+}
+
+.delete-column {
+    position: relative;
+    top: 30px;
+}
+
+.column input, .column select {
+    width: 140px;
+    height: 37px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(227, 226, 226);
+    border-image: initial;
+    border-radius: 3px;
+    color: black !important;
+
+}
+
+.schemaCont input, .schemaCont select {
+    width: 45%;
+    height: 37px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(227, 226, 226);
+    border-image: initial;
+    border-radius: 3px;
+    color: black !important;
+}
+
+.createSchema {
+    margin: 50px;
+}
+
+.schemaCont {
+    position: relative;
+}
+#createSchema {
+    position: absolute;
+    top: 130px;
+    right: 160px;
+    height: 30px;
+    padding: 0 5px;
+}
+
+
+.delete-column {
+    color: red;
+}
+
+.delete-column:hover {
+    color: darkred;
+}
+
+.hiddenSelect {
+    visibility: hidden;
+}
+
+.hiddenSelect input {
+    width: 60px;
+}
+#generate-data-btn {
+    height: 31px;
+    padding: 0 5px;
+    position: relative;
+    bottom: 3px;
+}
+
+.buttonReady{
+    background: green;
+    height: 22px;
+    padding: 0px 10px;
+    font-size: 12px;
+
+}
+.buttonReady:disabled, .buttonProcessing:disabled{
+    opacity: 1;
+}
+.buttonProcessing{
+    background: grey;
+    height: 22px;
+    padding: 0px 10px;
+    font-size: 12px;
+}
+
+

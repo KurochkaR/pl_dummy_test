@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Schema{% endblock %}
+
+{% block content %}
+  <div class="tableWrap">
+    <div class="flexTableHead">
+      <h2>Data Schemas</h2>
+      <a href="{% url 'create_schema' %}"><button class="btn btn-success">New schema</button></a>
+
+    </div>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Modified</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for schema in schemas %}
+      <tr>
+        <th scope="row">{{ schema.id }}</th>
+        <td><a href="{% url 'schema_detail' schema.id %}" class="nav-link">{{ schema.name }}</a></td>
+        <td>{{ schema.data }}</td>
+        <td>
+          <a href="{% url 'schema_update' schema.id %}" style="display: inline" class="nav-link">Update</a>	&nbsp;	&nbsp;
+          <a href="{% url 'schema_delete' schema.id %}" style="display: inline; color: red" class="nav-link red">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
